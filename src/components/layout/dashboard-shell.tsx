@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Separator } from "@/components/ui/separator";
 import { APP_ROUTES } from "@/lib/constants/app";
 
 const dashboardLinks = [
@@ -21,6 +22,7 @@ export function DashboardShell({ children }: DashboardShellProps) {
           <Link href={APP_ROUTES.dashboard} className="font-semibold tracking-tight">
             Job Copilot
           </Link>
+          <Separator className="mt-5" />
           <nav className="mt-6 flex gap-2 overflow-x-auto md:flex-col md:overflow-visible">
             {dashboardLinks.map((link) => (
               <Link

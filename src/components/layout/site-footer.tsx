@@ -1,9 +1,11 @@
 import Link from "next/link";
+import { Separator } from "@/components/ui/separator";
 import { APP_DESCRIPTION, APP_NAME, APP_ROUTES } from "@/lib/constants/app";
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-border bg-muted">
+    <footer className="bg-muted">
+      <Separator />
       <div className="mx-auto flex max-w-6xl flex-col gap-6 px-6 py-8 sm:flex-row sm:items-center sm:justify-between">
         <div className="max-w-xl">
           <p className="font-semibold text-foreground">{APP_NAME}</p>

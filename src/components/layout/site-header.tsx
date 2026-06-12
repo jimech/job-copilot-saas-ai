@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 import { APP_NAME, APP_ROUTES } from "@/lib/constants/app";
 
 export function SiteHeader() {
@@ -18,12 +19,9 @@ export function SiteHeader() {
           <Link className="transition-colors hover:text-foreground" href={APP_ROUTES.signIn}>
             Sign in
           </Link>
-          <Link
-            className="inline-flex h-9 items-center justify-center rounded-md bg-primary px-4 text-primary-foreground transition-colors hover:bg-primary/90"
-            href={APP_ROUTES.signUp}
-          >
-            Get started
-          </Link>
+          <Button asChild>
+            <Link href={APP_ROUTES.signUp}>Get started</Link>
+          </Button>
         </nav>
       </div>
     </header>

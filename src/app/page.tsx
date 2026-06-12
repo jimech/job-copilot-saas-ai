@@ -1,4 +1,11 @@
 import { MarketingShell } from "@/components/layout/marketing-shell";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { APP_DESCRIPTION, APP_NAME, APP_ROUTES } from "@/lib/constants/app";
 
 const features = [
@@ -28,26 +35,18 @@ export default function Home() {
           <p className="mt-6 text-lg leading-8 text-muted-foreground sm:text-xl">
             {APP_DESCRIPTION}
           </p>
-          <a
-            className="mt-10 inline-flex h-11 items-center justify-center rounded-md bg-primary px-6 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-            href={APP_ROUTES.signUp}
-          >
-            Get started
-          </a>
+          <Button asChild className="mt-10" size="lg">
+            <a href={APP_ROUTES.signUp}>Get started</a>
+          </Button>
         </div>
         <div className="mt-16 grid w-full gap-4 md:grid-cols-3">
           {features.map((feature) => (
-            <article
-              key={feature.title}
-              className="rounded-xl border border-border bg-background p-6 text-left shadow-sm"
-            >
-              <h2 className="text-base font-semibold text-foreground">
-                {feature.title}
-              </h2>
-              <p className="mt-3 text-sm leading-6 text-muted-foreground">
-                {feature.description}
-              </p>
-            </article>
+            <Card key={feature.title} className="text-left">
+              <CardHeader>
+                <CardTitle>{feature.title}</CardTitle>
+                <CardDescription>{feature.description}</CardDescription>
+              </CardHeader>
+            </Card>
           ))}
         </div>
       </section>
