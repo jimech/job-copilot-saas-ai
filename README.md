@@ -1,36 +1,120 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AI Resume and Job Application Copilot
+
+## Overview
+
+AI Resume and Job Application Copilot is a commercial SaaS product for global job seekers. It helps users create resumes, tailor resumes with AI, generate application materials, track job or internship applications, save job opportunities, manage subscriptions, and control AI credit usage.
+
+## Tech Stack
+
+Current foundation:
+
+- Next.js App Router
+- TypeScript
+- Tailwind CSS
+- shadcn/ui
+- Zod environment validation
+- npm
+
+Planned integrations, not fully implemented yet:
+
+- Supabase Auth
+- Supabase Postgres
+- Supabase Storage
+- Drizzle ORM
+- Vercel AI SDK
+- Stripe
+- Inngest
+- Sentry
 
 ## Getting Started
 
-First, run the development server:
+```bash
+npm install
+cp .env.example .env.local
+npm run dev
+```
+
+The app usually runs at:
+
+```txt
+http://localhost:3000
+```
+
+If port `3000` is busy, Next.js may use another available port.
+
+## Environment Variables
+
+Environment variables are validated with Zod and split between client-safe and server-only modules. See [docs/environment-variables.md](docs/environment-variables.md).
+
+Do not commit `.env.local` or any file containing real secrets.
+
+## Common Commands
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run build
+npm run start
+npm run lint
+npm run typecheck
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Project Structure
 
-You can start editing the page by modifying `src/app/page.tsx`. The page auto-updates as you edit the file.
+The app uses a `src/` structure with App Router pages in `src/app`, shared layout and UI components in `src/components`, reusable helpers in `src/lib`, future server-only modules in `src/server`, and shared types in `src/types`.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+See [docs/project-structure.md](docs/project-structure.md).
 
-## Learn More
+## Development Workflow
 
-To learn more about Next.js, take a look at the following resources:
+Recommended workflow:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Pick one ticket.
+2. Give Codex only that ticket prompt.
+3. Review changes locally.
+4. Run validation commands.
+5. Commit manually.
+6. Push manually.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+See [docs/codex-workflow.md](docs/codex-workflow.md).
 
-## Deploy on Vercel
+## Documentation
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- [Product brief](docs/product-brief.md)
+- [Technical architecture](docs/technical-architecture.md)
+- [Database schema plan](docs/database-schema.md)
+- [Security plan](docs/security-plan.md)
+- [Environment variables](docs/environment-variables.md)
+- [Local development](docs/local-development.md)
+- [Codex workflow](docs/codex-workflow.md)
+- [Project structure](docs/project-structure.md)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Current Status
+
+Current phase:
+
+```txt
+Phase 2 — Repository Foundation
+```
+
+Currently implemented:
+
+- Project foundation
+- Base routes
+- Layout system
+- shadcn/ui
+- Environment variable validation
+- Documentation
+
+Not implemented yet:
+
+- Authentication
+- Database
+- Resume builder logic
+- AI logic
+- Billing
+- Storage
+- Application tracker logic
+
+## Notes
+
+This repository is being built ticket-by-ticket. Keep changes scoped, validate locally before committing, and avoid adding integrations before their implementation tickets.
