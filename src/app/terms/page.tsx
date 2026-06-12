@@ -1,13 +1,13 @@
 import { MarketingShell } from "@/components/layout/marketing-shell";
 import { PageShell } from "@/components/layout/page-shell";
 
-export default function SignInPage() {
+export default function TermsPage() {
   return (
     <MarketingShell>
       <PageShell
-        eyebrow="Sign in"
-        title="Sign in"
-        description="Access your resumes, job applications, saved jobs, and billing settings."
+        eyebrow="Legal"
+        title="Terms"
+        description="This placeholder is not legal advice and must be reviewed before launch."
       />
     </MarketingShell>
   );
