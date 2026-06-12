@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
+import { APP_DESCRIPTION, APP_NAME } from "@/lib/constants/app";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "AI Resume and Job Application Copilot",
-  description:
-    "Create tailored resumes, generate application materials, track applications, and discover job opportunities.",
+  title: APP_NAME,
+  description: APP_DESCRIPTION,
 };
 
 export default function RootLayout({
