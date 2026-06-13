@@ -39,6 +39,22 @@ Do not commit real secrets. `.env.local` and other real environment files are ig
 
 Supabase, Stripe, AI provider, Inngest, and Sentry variables are optional until those integrations are implemented. Empty optional values are treated as not configured.
 
+## Supabase
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+SUPABASE_SERVICE_ROLE_KEY=
+DATABASE_URL=
+```
+
+- `NEXT_PUBLIC_SUPABASE_URL` is client-safe and points to the Supabase project URL.
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY` is client-safe, but all client access must still rely on Supabase Row Level Security.
+- `SUPABASE_SERVICE_ROLE_KEY` is server-only, bypasses RLS, and must never be exposed to the browser.
+- `DATABASE_URL` is server-only and will be used later by Drizzle ORM and database tooling.
+
+These variables are optional during foundation-only development. They are required before real authentication, database, storage, or admin Supabase features can work.
+
 ## Required Later
 
 Future implementation phases should make the relevant variables required when their integrations are added, such as Supabase credentials for auth/storage, Stripe keys for billing, AI provider keys for generation, Inngest keys for background jobs, and Sentry DSN for monitoring.

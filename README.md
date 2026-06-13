@@ -17,9 +17,9 @@ Current foundation:
 
 Planned integrations, not fully implemented yet:
 
-- Supabase Auth
-- Supabase Postgres
-- Supabase Storage
+- Supabase Auth client foundation
+- Supabase Postgres client foundation
+- Supabase Storage client foundation
 - Drizzle ORM
 - Vercel AI SDK
 - Stripe
@@ -108,6 +108,7 @@ Currently implemented:
 - Layout system
 - shadcn/ui
 - Environment variable validation
+- Supabase client helpers
 - Documentation
 
 Not implemented yet:

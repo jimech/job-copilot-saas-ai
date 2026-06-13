@@ -54,7 +54,9 @@ Important routes currently present:
 
 ## Server
 
-`src/server` is reserved for future server-only modules.
+`src/server` contains server-oriented integration modules and future server-only domain code.
+
+- `src/server/supabase` contains browser, server, and admin Supabase client helpers.
 
 ## Types
 
@@ -84,6 +86,7 @@ Future server folders may include:
 ```txt
 src/server/auth
 src/server/db
+src/server/supabase
 src/server/ai
 src/server/billing
 src/server/resumes
