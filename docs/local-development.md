@@ -48,6 +48,8 @@ The auth callback, sign-out route handler, sign-up form, sign-in form, Supabase 
 
 Supabase environment variables are required to test real auth behavior. If Supabase public variables are missing, public pages still render and protected app routes redirect to `/sign-in?error=auth_unconfigured`.
 
+Server auth utilities exist under `src/server/auth`. Future server pages, actions, and route handlers should use `requireUser()` when a signed-in user is required. Future admin-only code should use `requireAdmin()` after admin roles are configured; full admin route enforcement is not implemented yet.
+
 ## Testing Sign-Up Locally
 
 1. Create a Supabase project.

@@ -113,11 +113,12 @@ Currently implemented:
 - Supabase sign-up and sign-in pages
 - Supabase session refresh proxy
 - Authentication-based app route protection
+- Server auth session utilities
 - Documentation
 
 Not implemented yet:
 
-- Admin role checks
+- Full admin route enforcement
 - Database
 - Resume builder logic
 - AI logic
@@ -128,5 +129,7 @@ Not implemented yet:
 ## Notes
 
 Protected app routes require authentication. Unauthenticated users are redirected to `/sign-in?next=...`, and signed-in users who visit `/sign-in` or `/sign-up` are redirected to `/dashboard`.
+
+Server auth utilities live under `src/server/auth`. Future server pages, actions, and route handlers should use `requireUser()` when authentication is required, and `requireAdmin()` after admin roles are configured. Full admin route enforcement is not implemented yet.
 
 This repository is being built ticket-by-ticket. Keep changes scoped, validate locally before committing, and avoid adding integrations before their implementation tickets.

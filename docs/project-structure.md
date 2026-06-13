@@ -10,7 +10,7 @@
 - `postcss.config.mjs` contains PostCSS configuration for Tailwind.
 - `components.json` configures shadcn/ui.
 - `.env.example` lists expected environment variables without real secrets.
-- `src/proxy.ts` is the Next.js 16 request interception entrypoint. It currently refreshes Supabase auth sessions and does not protect routes yet.
+- `src/proxy.ts` is the Next.js 16 request interception entrypoint. It refreshes Supabase auth sessions and redirects unauthenticated users away from protected app routes.
 
 ## App Directory
 
@@ -59,6 +59,7 @@ Important routes currently present:
 
 - `src/server/supabase` contains browser, server, and admin Supabase client helpers.
 - `src/server/supabase/middleware.ts` contains the internal Supabase session refresh helper used by `src/proxy.ts`.
+- `src/server/auth` contains safe redirect helpers, route protection helpers, reusable session utilities, and placeholder admin utilities for future server pages, actions, and route handlers.
 
 ## Types
 
@@ -86,9 +87,7 @@ Current docs:
 Future server folders may include:
 
 ```txt
-src/server/auth
 src/server/db
-src/server/supabase
 src/server/ai
 src/server/billing
 src/server/resumes
