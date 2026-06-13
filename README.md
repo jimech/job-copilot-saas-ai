@@ -115,6 +115,7 @@ Currently implemented:
 - Authentication-based app route protection
 - Server auth session utilities
 - Metadata-backed onboarding form
+- Auth-aware navigation and sign-out UI
 - Documentation
 
 Not implemented yet:
@@ -134,5 +135,7 @@ Protected app routes require authentication. Unauthenticated users are redirecte
 Server auth utilities live under `src/server/auth`. Future server pages, actions, and route handlers should use `requireUser()` when authentication is required, and `requireAdmin()` after admin roles are configured. Full admin route enforcement is not implemented yet.
 
 Onboarding currently saves basic profile preferences to Supabase Auth user metadata. Database-backed profile persistence will be added in a later database phase.
+
+Navigation is now auth-aware. Signed-out users see marketing and auth links, while signed-in users see app links and a sign-out control that posts to `/auth/sign-out`. No database profile data is used yet.
 
 This repository is being built ticket-by-ticket. Keep changes scoped, validate locally before committing, and avoid adding integrations before their implementation tickets.

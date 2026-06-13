@@ -1,6 +1,9 @@
 import Link from "next/link";
+
+import { SignOutButton } from "@/components/auth/sign-out-button";
 import { Separator } from "@/components/ui/separator";
 import { APP_ROUTES } from "@/lib/constants/app";
+import { getCurrentUser } from "@/server/auth";
 
 const dashboardLinks = [
   { href: APP_ROUTES.dashboard, label: "Dashboard" },
@@ -14,12 +17,17 @@ type DashboardShellProps = {
   children: React.ReactNode;
 };
 
-export function DashboardShell({ children }: DashboardShellProps) {
+export async function DashboardShell({ children }: DashboardShellProps) {
+  const user = await getCurrentUser();
+
   return (
     <div className="min-h-screen bg-muted">
       <div className="mx-auto grid min-h-screen max-w-7xl md:grid-cols-[240px_1fr]">
-        <aside className="border-b border-border bg-background px-6 py-5 md:border-b-0 md:border-r">
-          <Link href={APP_ROUTES.dashboard} className="font-semibold tracking-tight">
+        <aside className="flex flex-col border-b border-border bg-background px-6 py-5 md:border-b-0 md:border-r">
+          <Link
+            href={APP_ROUTES.dashboard}
+            className="font-semibold tracking-tight"
+          >
             Job Copilot
           </Link>
           <Separator className="mt-5" />
@@ -34,6 +42,14 @@ export function DashboardShell({ children }: DashboardShellProps) {
               </Link>
             ))}
           </nav>
+          <div className="mt-6 flex flex-col gap-3 border-t border-border pt-5 md:mt-auto">
+            {user?.email ? (
+              <p className="break-words text-xs leading-5 text-muted-foreground">
+                Signed in as {user.email}
+              </p>
+            ) : null}
+            <SignOutButton className="w-full [&_button]:w-full" />
+          </div>
         </aside>
         <main className="bg-background">{children}</main>
       </div>
