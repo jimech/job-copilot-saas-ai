@@ -55,7 +55,7 @@ DATABASE_URL=
 
 These variables are optional during foundation-only development. They are required before real authentication, database, storage, or admin Supabase features can work.
 
-Supabase session refresh middleware uses the public Supabase URL and anon key to keep auth cookies synchronized for server-rendered routes. Without those public variables, the middleware skips Supabase and lets the app render. Route protection is not implemented yet.
+Supabase session refresh proxy uses the public Supabase URL and anon key to keep auth cookies synchronized for server-rendered routes. Without those public variables, the proxy skips Supabase and lets the app render. Route protection is not implemented yet.
 
 ### Supabase Auth Redirect URLs
 

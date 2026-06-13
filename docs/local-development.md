@@ -43,9 +43,9 @@ The production redirect URL should later use the deployed app domain:
 https://your-domain.com/auth/callback
 ```
 
-The auth callback, sign-out route handler, sign-up form, sign-in form, and Supabase session refresh middleware exist. Route protection is not implemented yet, so dashboard and app routes may still be accessible without login until the next auth ticket.
+The auth callback, sign-out route handler, sign-up form, sign-in form, and Supabase session refresh proxy exist. Route protection is not implemented yet, so dashboard and app routes may still be accessible without login until the next auth ticket.
 
-Supabase environment variables are required to test real auth behavior. If Supabase public variables are missing, the middleware allows the app to render without crashing.
+Supabase environment variables are required to test real auth behavior. If Supabase public variables are missing, the proxy allows the app to render without crashing.
 
 ## Testing Sign-Up Locally
 
@@ -94,11 +94,11 @@ http://localhost:3002/sign-in
 
 If email confirmation is enabled, confirm the test user's email before sign-in works. Do not commit `.env.local` or real Supabase secrets.
 
-## Supabase Session Refresh Middleware
+## Supabase Session Refresh Proxy
 
-The app includes middleware that refreshes Supabase auth cookies before server-rendered routes load. It does not redirect unauthenticated users or protect routes yet.
+The app includes `src/proxy.ts`, the Next.js 16 request interception entrypoint, to refresh Supabase auth cookies before server-rendered routes load. It does not redirect unauthenticated users or protect routes yet.
 
-For middleware checks on a known port:
+For proxy checks on a known port:
 
 ```bash
 npm run dev -- -p 3002

@@ -111,7 +111,7 @@ Currently implemented:
 - Supabase client helpers
 - Supabase auth callback and sign-out route handlers
 - Supabase sign-up and sign-in pages
-- Supabase session refresh middleware
+- Supabase session refresh proxy
 - Documentation
 
 Not implemented yet:
