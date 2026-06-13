@@ -53,9 +53,21 @@ DATABASE_URL=
 - `NEXT_PUBLIC_SUPABASE_URL` is client-safe and points to the Supabase project URL.
 - `NEXT_PUBLIC_SUPABASE_ANON_KEY` is client-safe and may contain the Supabase publishable key value, but all client access must still rely on Supabase Row Level Security.
 - `SUPABASE_SERVICE_ROLE_KEY` is server-only, bypasses RLS, and must never be exposed to the browser.
-- `DATABASE_URL` is server-only and will be used later by Drizzle ORM and database tooling.
+- `DATABASE_URL` is server-only and is used by Drizzle ORM and database tooling.
 
 These variables are optional during foundation-only development. They are required before real authentication, database, storage, or admin Supabase features can work.
+
+### Drizzle Database URL
+
+Drizzle commands read `DATABASE_URL` through `drizzle.config.ts`.
+
+- Use a Supabase Postgres connection string from the Supabase project dashboard.
+- Keep the value in `.env.local` or another uncommitted local environment file.
+- Prefer a pooled connection string for serverless runtime access when available.
+- Use the Supabase-recommended connection string for migration commands.
+- Never expose `DATABASE_URL` to Client Components or browser code.
+
+The database client is initialized lazily, so normal builds can run before `DATABASE_URL` is configured. Commands such as `npm run db:generate`, `npm run db:migrate`, `npm run db:studio`, and `npm run db:check` require `DATABASE_URL`.
 
 Supabase session refresh proxy uses the public Supabase URL and anon key to keep auth cookies synchronized for server-rendered routes. Without those public variables, public pages still render and protected routes redirect to `/sign-in?error=auth_unconfigured`.
 
