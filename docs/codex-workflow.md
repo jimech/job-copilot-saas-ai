@@ -55,7 +55,10 @@ Run:
 npm run typecheck
 npm run lint
 npm run build
+npm run check
 ```
+
+Use `npm run check` before committing. GitHub Actions runs typecheck, lint, and build after changes are pushed to GitHub.
 
 If a command fails because of the ticket changes, fix the issue before committing. If a command fails because of a local environment issue, document it clearly.
 

@@ -56,7 +56,10 @@ npm run build
 npm run start
 npm run lint
 npm run typecheck
+npm run check
 ```
+
+`npm run check` runs typecheck, lint, and build in sequence.
 
 ## Project Structure
 
@@ -71,9 +74,11 @@ Recommended workflow:
 1. Pick one ticket.
 2. Give Codex only that ticket prompt.
 3. Review changes locally.
-4. Run validation commands.
+4. Run `npm run check`.
 5. Commit manually.
 6. Push manually.
+
+GitHub Actions runs the same validation on pull requests and pushes to `main`.
 
 See [docs/codex-workflow.md](docs/codex-workflow.md).
 

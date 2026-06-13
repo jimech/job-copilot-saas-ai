@@ -45,7 +45,10 @@ Run these before committing:
 npm run typecheck
 npm run lint
 npm run build
+npm run check
 ```
+
+`npm run check` runs typecheck, lint, and build in sequence. This is the recommended command before committing.
 
 ## Troubleshooting
 
@@ -75,13 +78,18 @@ Turbopack local port binding issue:
 - In sandboxed environments, Turbopack may fail while creating an internal process or binding to a local port.
 - If this happens, rerun the build locally outside the sandbox.
 
+CI failures:
+
+- Reproduce CI locally with `npm run check`.
+- If dependency installation fails in CI, run `npm install` locally and commit the updated `package-lock.json`.
+- Never commit `.env.local` or any real secret file.
+- Production secrets should be configured in the deployment platform settings, not committed.
+
 ## Before Committing
 
 ```bash
 git status
-npm run typecheck
-npm run lint
-npm run build
+npm run check
 ```
 
 Then commit manually:
