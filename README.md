@@ -123,13 +123,14 @@ Currently implemented:
 - Auth-aware navigation and sign-out UI
 - Drizzle ORM package and configuration foundation
 - Lazy server-side Drizzle client
+- Core Drizzle schema tables and enums
 - Documentation
 
 Not implemented yet:
 
-- Application database schema
 - Generated database migrations
 - Supabase RLS policies
+- pgvector and document embeddings
 - Full admin route enforcement
 - Resume builder logic
 - Resume upload/storage
@@ -146,7 +147,7 @@ Server auth utilities live under `src/server/auth`. Future server pages, actions
 
 Onboarding currently saves basic profile preferences to Supabase Auth user metadata. Database-backed profile persistence will be added in a later database phase.
 
-Drizzle is configured for future Supabase Postgres schema and migration work. No application tables, migrations, or RLS policies have been created yet.
+Drizzle is configured for Supabase Postgres schema and migration work. Core schema tables now exist in TypeScript, but no generated migrations, RLS policies, pgvector setup, or `document_embeddings` table have been created yet.
 
 Navigation is now auth-aware. Signed-out users see marketing and auth links, while signed-in users see app links and a sign-out control that posts to `/auth/sign-out`. No database profile data is used yet.
 

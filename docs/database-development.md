@@ -2,7 +2,7 @@
 
 ## Overview
 
-The app uses Drizzle ORM for schema definitions, migrations, and server-side queries against Supabase Postgres. This foundation adds the tooling and folder structure only; application tables, migrations, RLS policies, and product database logic will be added in later tickets.
+The app uses Drizzle ORM for schema definitions, migrations, and server-side queries against Supabase Postgres. The core application schema tables now exist in TypeScript. Generated migrations, RLS policies, pgvector setup, and product database logic will be added in later tickets.
 
 ## Local Environment
 
@@ -20,7 +20,7 @@ For serverless runtime access, prefer a pooled Supabase connection string when a
 
 - `drizzle.config.ts` configures Drizzle Kit.
 - `src/server/db/client.ts` exposes a lazy server-side Drizzle client.
-- `src/server/db/schema/index.ts` is the central schema export file.
+- `src/server/db/schema/index.ts` is the central schema export file for the current core tables and enums.
 - `src/server/db/migrations` is reserved for generated migration files.
 
 The database client is created lazily so normal app builds can pass without `DATABASE_URL` configured. Any code that calls `getDb()` still requires `DATABASE_URL`.
@@ -50,6 +50,8 @@ Do not run migration commands against production without reviewing the generated
 5. Apply migrations only after review.
 6. Commit schema changes and generated migration files together.
 
+Migrations have not been generated yet. The next database ticket should generate and review the first migration from the current Drizzle schema.
+
 ## Safety Rules
 
 - Do not place real secrets in tracked files.
@@ -61,4 +63,6 @@ Do not run migration commands against production without reviewing the generated
 
 ## Current Status
 
-Drizzle ORM is installed and configured. The schema export exists, but there are no application tables or generated migrations yet.
+Drizzle ORM is installed and configured. The core schema tables now exist for users, profiles, subscriptions, resumes, resume documents, jobs, applications, generated documents, and AI generations.
+
+There are no generated migrations or RLS policies yet. `document_embeddings` and pgvector setup are intentionally deferred to a later pgvector ticket.

@@ -2,11 +2,18 @@
 
 ## 1. Database Overview
 
-The app uses Supabase Postgres as the primary relational database. Drizzle ORM will later implement the schema, define migrations, and provide typed database access from server-side application code.
+The app uses Supabase Postgres as the primary relational database. Drizzle ORM now defines the core schema tables in TypeScript, and later tickets will generate migrations and provide typed database access from server-side application code.
 
 Most user-owned tables include a `user_id` column so data can be scoped to the authenticated user. User data must be isolated by default, and Supabase Row Level Security will be used to enforce ownership rules at the database layer. Server-side authorization checks should also be used before reading or mutating protected records.
 
-pgvector will be used for embeddings that support resume, job, application, and profile similarity search. UUID primary keys should be used across tables. Most tables should include `created_at` and `updated_at` timestamps where appropriate.
+pgvector will be used later for embeddings that support resume, job, application, and profile similarity search. UUID primary keys should be used across tables. Most tables should include `created_at` and `updated_at` timestamps where appropriate.
+
+Current implementation status:
+
+- Core Drizzle schema tables exist in `src/server/db/schema/index.ts`.
+- Migrations have not been generated yet.
+- RLS policies have not been added yet.
+- `document_embeddings` and pgvector are intentionally deferred to a later ticket.
 
 ## 2. Tables
 
@@ -243,6 +250,8 @@ Purpose: Stores AI requests, outputs, model info, and estimated cost.
 ### document_embeddings
 
 Purpose: Stores vector embeddings for resumes, jobs, applications, and profile chunks.
+
+Implementation status: intentionally deferred. This table requires pgvector setup and should be added in a separate pgvector ticket.
 
 | Column | Type | Notes |
 |---|---|---|

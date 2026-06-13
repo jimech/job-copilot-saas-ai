@@ -65,7 +65,7 @@ Important routes currently present:
 - `src/server/auth` contains safe redirect helpers, route protection helpers, reusable session utilities, and placeholder admin utilities for future server pages, actions, and route handlers.
 - `src/server/db` contains the Drizzle ORM foundation.
 - `src/server/db/client.ts` exposes a lazy server-side Drizzle client.
-- `src/server/db/schema/index.ts` is the central Drizzle schema export file. Application tables will be added later.
+- `src/server/db/schema/index.ts` is the central Drizzle schema export file for core application tables and enums.
 - `src/server/db/migrations` is reserved for generated Drizzle migration files.
 
 ## Types
