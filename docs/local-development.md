@@ -43,7 +43,33 @@ The production redirect URL should later use the deployed app domain:
 https://your-domain.com/auth/callback
 ```
 
-The auth callback and sign-out route handlers exist, but sign-in and sign-up forms are not implemented yet.
+The auth callback, sign-out route handler, and sign-up form exist, but the sign-in form is not implemented yet.
+
+## Testing Sign-Up Locally
+
+1. Create a Supabase project.
+2. Add Supabase values to `.env.local`.
+3. Add the local callback URL in Supabase Auth settings:
+
+```txt
+http://localhost:3000/auth/callback
+```
+
+4. Run the app:
+
+```bash
+npm run dev
+```
+
+5. Visit:
+
+```txt
+http://localhost:3000/sign-up
+```
+
+6. Create an account.
+
+If email confirmation is enabled, confirm the email before signing in. Do not commit `.env.local` or real Supabase secrets.
 
 ## Running the App
 
