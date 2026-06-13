@@ -71,6 +71,27 @@ http://localhost:3000/sign-up
 
 If email confirmation is enabled, confirm the email before signing in. Do not commit `.env.local` or real Supabase secrets.
 
+## Testing Sign-In Locally
+
+1. Create a Supabase project.
+2. Add Supabase values to `.env.local`.
+3. Make sure a confirmed test user exists.
+4. Run the app locally on a known port:
+
+```bash
+npm run dev -- -p 3002
+```
+
+5. Visit:
+
+```txt
+http://localhost:3002/sign-in
+```
+
+6. Sign in with the test user.
+
+If email confirmation is enabled, confirm the test user's email before sign-in works. Do not commit `.env.local` or real Supabase secrets.
+
 ## Running the App
 
 ```bash
