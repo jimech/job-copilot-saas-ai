@@ -90,6 +90,7 @@ See [docs/codex-workflow.md](docs/codex-workflow.md).
 - [Security plan](docs/security-plan.md)
 - [Environment variables](docs/environment-variables.md)
 - [Local development](docs/local-development.md)
+- [Auth QA checklist](docs/auth-qa-checklist.md)
 - [Codex workflow](docs/codex-workflow.md)
 - [Project structure](docs/project-structure.md)
 
@@ -98,35 +99,35 @@ See [docs/codex-workflow.md](docs/codex-workflow.md).
 Current phase:
 
 ```txt
-Phase 2 — Repository Foundation
+Phase 3 — Authentication Foundation Complete
 ```
 
 Currently implemented:
 
-- Project foundation
-- Base routes
-- Layout system
+- Next.js app foundation
+- Layout and routes
 - shadcn/ui
 - Environment variable validation
-- Supabase client helpers
-- Supabase auth callback and sign-out route handlers
-- Supabase sign-up and sign-in pages
-- Supabase session refresh proxy
-- Authentication-based app route protection
+- Supabase Auth foundation
+- Sign-up, sign-in, and sign-out
+- Protected routes
 - Server auth session utilities
-- Metadata-backed onboarding form
+- Onboarding metadata form
 - Auth-aware navigation and sign-out UI
 - Documentation
 
 Not implemented yet:
 
+- Database schema
+- Drizzle
+- Supabase RLS policies
 - Full admin route enforcement
-- Database
 - Resume builder logic
+- Resume upload/storage
 - AI logic
 - Billing
-- Storage
 - Application tracker logic
+- Job persistence
 
 ## Notes
 
@@ -137,5 +138,7 @@ Server auth utilities live under `src/server/auth`. Future server pages, actions
 Onboarding currently saves basic profile preferences to Supabase Auth user metadata. Database-backed profile persistence will be added in a later database phase.
 
 Navigation is now auth-aware. Signed-out users see marketing and auth links, while signed-in users see app links and a sign-out control that posts to `/auth/sign-out`. No database profile data is used yet.
+
+Run the [auth QA checklist](docs/auth-qa-checklist.md) after changing auth, proxy, onboarding, or navigation code.
 
 This repository is being built ticket-by-ticket. Keep changes scoped, validate locally before committing, and avoid adding integrations before their implementation tickets.

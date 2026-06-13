@@ -43,7 +43,9 @@ Important routes currently present:
 ## Components
 
 - `src/components` contains shared React components.
+- `src/components/auth` contains authentication UI such as sign-in, sign-up, and sign-out controls.
 - `src/components/layout` contains layout wrappers such as marketing and dashboard shells.
+- `src/components/onboarding` contains the metadata-backed onboarding form.
 - `src/components/ui` contains shadcn/ui components owned by the project.
 
 ## Lib
@@ -74,6 +76,7 @@ Current docs:
 - `docs/database-schema.md`
 - `docs/security-plan.md`
 - `docs/environment-variables.md`
+- `docs/auth-qa-checklist.md`
 - `docs/local-development.md`
 - `docs/codex-workflow.md`
 - `docs/project-structure.md`

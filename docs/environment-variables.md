@@ -42,20 +42,22 @@ Supabase, Stripe, AI provider, Inngest, and Sentry variables are optional until 
 ## Supabase
 
 ```env
+NEXT_PUBLIC_APP_URL=http://localhost:3003
 NEXT_PUBLIC_SUPABASE_URL=
 NEXT_PUBLIC_SUPABASE_ANON_KEY=
 SUPABASE_SERVICE_ROLE_KEY=
 DATABASE_URL=
 ```
 
+- `NEXT_PUBLIC_APP_URL` is client-safe and should match the local app URL used during auth testing.
 - `NEXT_PUBLIC_SUPABASE_URL` is client-safe and points to the Supabase project URL.
-- `NEXT_PUBLIC_SUPABASE_ANON_KEY` is client-safe, but all client access must still rely on Supabase Row Level Security.
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY` is client-safe and may contain the Supabase publishable key value, but all client access must still rely on Supabase Row Level Security.
 - `SUPABASE_SERVICE_ROLE_KEY` is server-only, bypasses RLS, and must never be exposed to the browser.
 - `DATABASE_URL` is server-only and will be used later by Drizzle ORM and database tooling.
 
 These variables are optional during foundation-only development. They are required before real authentication, database, storage, or admin Supabase features can work.
 
-Supabase session refresh proxy uses the public Supabase URL and anon key to keep auth cookies synchronized for server-rendered routes. Without those public variables, the proxy skips Supabase and lets the app render. Route protection is not implemented yet.
+Supabase session refresh proxy uses the public Supabase URL and anon key to keep auth cookies synchronized for server-rendered routes. Without those public variables, public pages still render and protected routes redirect to `/sign-in?error=auth_unconfigured`.
 
 ### Supabase Auth Redirect URLs
 
@@ -69,6 +71,8 @@ If local development runs on another port, add that callback URL too, for exampl
 
 ```txt
 http://localhost:3001/auth/callback
+http://localhost:3002/auth/callback
+http://localhost:3003/auth/callback
 ```
 
 The production callback URL should later use the deployed domain:
@@ -76,6 +80,8 @@ The production callback URL should later use the deployed domain:
 ```txt
 https://your-domain.com/auth/callback
 ```
+
+Do not commit `.env.local` or any file containing real Supabase keys or secrets.
 
 ## Required Later
 

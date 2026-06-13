@@ -23,6 +23,8 @@ Environment variables are documented in [environment-variables.md](environment-v
 
 Most future integration variables are optional for now because Supabase, Stripe, AI, Inngest, and Sentry are not fully implemented yet.
 
+Run the [auth QA checklist](auth-qa-checklist.md) after changing auth, proxy, onboarding, or navigation code.
+
 ## Supabase Auth Local Setup
 
 When testing Supabase Auth locally, configure the Supabase project redirect URLs to include:
@@ -53,6 +55,8 @@ Server auth utilities exist under `src/server/auth`. Future server pages, action
 Onboarding currently saves full name, country, preferred language, target roles, and experience level to Supabase Auth user metadata. Database profile persistence will be added later. To test onboarding, sign up or sign in first, then visit `/onboarding`.
 
 Navigation is auth-aware. Signed-out users see public marketing links, and signed-in users see app navigation plus a sign-out button. Sign out uses a POST request to `/auth/sign-out`; no database profile data is used for navigation yet.
+
+For the full authentication test plan, see [auth-qa-checklist.md](auth-qa-checklist.md).
 
 ## Testing Sign-Up Locally
 
