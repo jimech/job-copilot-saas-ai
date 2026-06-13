@@ -2,7 +2,7 @@
 
 ## Overview
 
-The app uses Drizzle ORM for schema definitions, migrations, and server-side queries against Supabase Postgres. The core application schema tables now exist in TypeScript. Generated migrations, RLS policies, pgvector setup, and product database logic will be added in later tickets.
+The app uses Drizzle ORM for schema definitions, migrations, and server-side queries against Supabase Postgres. The core application schema tables now exist in TypeScript, and the initial SQL migration has been generated. Applying migrations, RLS policies, pgvector setup, and product database logic will be handled in later tickets.
 
 ## Local Environment
 
@@ -21,7 +21,7 @@ For serverless runtime access, prefer a pooled Supabase connection string when a
 - `drizzle.config.ts` configures Drizzle Kit.
 - `src/server/db/client.ts` exposes a lazy server-side Drizzle client.
 - `src/server/db/schema/index.ts` is the central schema export file for the current core tables and enums.
-- `src/server/db/migrations` is reserved for generated migration files.
+- `src/server/db/migrations` contains generated Drizzle migration files and metadata.
 
 The database client is created lazily so normal app builds can pass without `DATABASE_URL` configured. Any code that calls `getDb()` still requires `DATABASE_URL`.
 
@@ -46,11 +46,10 @@ Do not run migration commands against production without reviewing the generated
 1. Update Drizzle schema files under `src/server/db/schema`.
 2. Run `npm run db:generate`.
 3. Review the generated SQL in `src/server/db/migrations`.
-4. Run `npm run db:check`.
-5. Apply migrations only after review.
-6. Commit schema changes and generated migration files together.
+4. Commit schema changes and generated migration files together.
+5. Apply the migration only in the dedicated migration-apply ticket.
 
-Migrations have not been generated yet. The next database ticket should generate and review the first migration from the current Drizzle schema.
+The initial migration has been generated but has not been applied to Supabase. Do not run `npm run db:migrate` until the dedicated migration-apply ticket.
 
 ## Safety Rules
 
@@ -63,6 +62,6 @@ Migrations have not been generated yet. The next database ticket should generate
 
 ## Current Status
 
-Drizzle ORM is installed and configured. The core schema tables now exist for users, profiles, subscriptions, resumes, resume documents, jobs, applications, generated documents, and AI generations.
+Drizzle ORM is installed and configured. The core schema tables now exist for users, profiles, subscriptions, resumes, resume documents, jobs, applications, generated documents, and AI generations. The initial migration has been generated in `src/server/db/migrations`.
 
-There are no generated migrations or RLS policies yet. `document_embeddings` and pgvector setup are intentionally deferred to a later pgvector ticket.
+The migration has not been applied yet, and there are no RLS policies yet. `document_embeddings` and pgvector setup are intentionally deferred to a later pgvector ticket.

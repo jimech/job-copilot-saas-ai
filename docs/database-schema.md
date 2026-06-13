@@ -2,7 +2,7 @@
 
 ## 1. Database Overview
 
-The app uses Supabase Postgres as the primary relational database. Drizzle ORM now defines the core schema tables in TypeScript, and later tickets will generate migrations and provide typed database access from server-side application code.
+The app uses Supabase Postgres as the primary relational database. Drizzle ORM now defines the core schema tables in TypeScript, and the initial SQL migration has been generated. Later tickets will apply migrations to Supabase and provide typed database access from server-side application code.
 
 Most user-owned tables include a `user_id` column so data can be scoped to the authenticated user. User data must be isolated by default, and Supabase Row Level Security will be used to enforce ownership rules at the database layer. Server-side authorization checks should also be used before reading or mutating protected records.
 
@@ -11,7 +11,7 @@ pgvector will be used later for embeddings that support resume, job, application
 Current implementation status:
 
 - Core Drizzle schema tables exist in `src/server/db/schema/index.ts`.
-- Migrations have not been generated yet.
+- The initial migration exists in `src/server/db/migrations`, but it has not been applied yet.
 - RLS policies have not been added yet.
 - `document_embeddings` and pgvector are intentionally deferred to a later ticket.
 
