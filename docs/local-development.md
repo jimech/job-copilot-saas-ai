@@ -50,6 +50,8 @@ Supabase environment variables are required to test real auth behavior. If Supab
 
 Server auth utilities exist under `src/server/auth`. Future server pages, actions, and route handlers should use `requireUser()` when a signed-in user is required. Future admin-only code should use `requireAdmin()` after admin roles are configured; full admin route enforcement is not implemented yet.
 
+Onboarding currently saves full name, country, preferred language, target roles, and experience level to Supabase Auth user metadata. Database profile persistence will be added later. To test onboarding, sign up or sign in first, then visit `/onboarding`.
+
 ## Testing Sign-Up Locally
 
 1. Create a Supabase project.
