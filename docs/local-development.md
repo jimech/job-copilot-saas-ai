@@ -23,6 +23,28 @@ Environment variables are documented in [environment-variables.md](environment-v
 
 Most future integration variables are optional for now because Supabase, Stripe, AI, Inngest, and Sentry are not fully implemented yet.
 
+## Supabase Auth Local Setup
+
+When testing Supabase Auth locally, configure the Supabase project redirect URLs to include:
+
+```txt
+http://localhost:3000/auth/callback
+```
+
+If Next.js starts on another port, add that callback URL too, for example:
+
+```txt
+http://localhost:3001/auth/callback
+```
+
+The production redirect URL should later use the deployed app domain:
+
+```txt
+https://your-domain.com/auth/callback
+```
+
+The auth callback and sign-out route handlers exist, but sign-in and sign-up forms are not implemented yet.
+
 ## Running the App
 
 ```bash

@@ -109,11 +109,13 @@ Currently implemented:
 - shadcn/ui
 - Environment variable validation
 - Supabase client helpers
+- Supabase auth callback and sign-out route handlers
 - Documentation
 
 Not implemented yet:
 
-- Authentication
+- Sign-in and sign-up forms
+- Route protection
 - Database
 - Resume builder logic
 - AI logic

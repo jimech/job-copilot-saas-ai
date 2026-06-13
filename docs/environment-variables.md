@@ -55,6 +55,26 @@ DATABASE_URL=
 
 These variables are optional during foundation-only development. They are required before real authentication, database, storage, or admin Supabase features can work.
 
+### Supabase Auth Redirect URLs
+
+Configure Supabase Auth redirect URLs to include the local callback route:
+
+```txt
+http://localhost:3000/auth/callback
+```
+
+If local development runs on another port, add that callback URL too, for example:
+
+```txt
+http://localhost:3001/auth/callback
+```
+
+The production callback URL should later use the deployed domain:
+
+```txt
+https://your-domain.com/auth/callback
+```
+
 ## Required Later
 
 Future implementation phases should make the relevant variables required when their integrations are added, such as Supabase credentials for auth/storage, Stripe keys for billing, AI provider keys for generation, Inngest keys for background jobs, and Sentry DSN for monitoring.
