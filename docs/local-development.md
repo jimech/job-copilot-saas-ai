@@ -35,6 +35,7 @@ If Next.js starts on another port, add that callback URL too, for example:
 
 ```txt
 http://localhost:3001/auth/callback
+http://localhost:3003/auth/callback
 ```
 
 The production redirect URL should later use the deployed app domain:
@@ -43,9 +44,9 @@ The production redirect URL should later use the deployed app domain:
 https://your-domain.com/auth/callback
 ```
 
-The auth callback, sign-out route handler, sign-up form, sign-in form, and Supabase session refresh proxy exist. Route protection is not implemented yet, so dashboard and app routes may still be accessible without login until the next auth ticket.
+The auth callback, sign-out route handler, sign-up form, sign-in form, Supabase session refresh proxy, and authentication-based app route protection exist.
 
-Supabase environment variables are required to test real auth behavior. If Supabase public variables are missing, the proxy allows the app to render without crashing.
+Supabase environment variables are required to test real auth behavior. If Supabase public variables are missing, public pages still render and protected app routes redirect to `/sign-in?error=auth_unconfigured`.
 
 ## Testing Sign-Up Locally
 
@@ -96,24 +97,43 @@ If email confirmation is enabled, confirm the test user's email before sign-in w
 
 ## Supabase Session Refresh Proxy
 
-The app includes `src/proxy.ts`, the Next.js 16 request interception entrypoint, to refresh Supabase auth cookies before server-rendered routes load. It does not redirect unauthenticated users or protect routes yet.
+The app includes `src/proxy.ts`, the Next.js 16 request interception entrypoint, to refresh Supabase auth cookies before server-rendered routes load. It also redirects unauthenticated users away from protected app routes.
+
+Protected route prefixes:
+
+```txt
+/onboarding
+/dashboard
+/resumes
+/jobs
+/applications
+/account
+/admin
+```
+
+Unauthenticated users visiting protected routes are redirected to `/sign-in?next=...`. Signed-in users visiting `/sign-in` or `/sign-up` are redirected to `/dashboard`.
 
 For proxy checks on a known port:
 
 ```bash
-npm run dev -- -p 3002
+npm run dev -- -p 3003
 ```
 
 Visit:
 
 ```txt
-http://localhost:3002/
-http://localhost:3002/sign-in
-http://localhost:3002/sign-up
-http://localhost:3002/dashboard
+http://localhost:3003/
+http://localhost:3003/sign-in
+http://localhost:3003/sign-up
+http://localhost:3003/dashboard
+http://localhost:3003/resumes
+http://localhost:3003/jobs
+http://localhost:3003/applications
+http://localhost:3003/account/billing
+http://localhost:3003/admin
 ```
 
-Expected for this phase: pages render, dashboard may still be accessible without login, and missing Supabase public env vars should not crash the app.
+Expected for this phase: public pages render, protected routes redirect when unauthenticated, and missing Supabase public env vars should not crash the app.
 
 ## Running the App
 

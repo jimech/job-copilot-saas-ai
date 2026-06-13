@@ -1,10 +1,19 @@
 import { createServerClient } from "@supabase/ssr";
+import type { User } from "@supabase/supabase-js";
 import { NextResponse, type NextRequest } from "next/server";
 
 import { getSupabasePublicConfig } from "@/server/supabase/config";
 import type { Database } from "@/server/supabase/types";
 
-export async function updateSession(request: NextRequest) {
+type SessionRefreshResult = {
+  isConfigured: boolean;
+  response: NextResponse;
+  user: User | null;
+};
+
+export async function refreshSession(
+  request: NextRequest,
+): Promise<SessionRefreshResult> {
   let supabaseResponse = NextResponse.next({
     request,
   });
@@ -14,7 +23,11 @@ export async function updateSession(request: NextRequest) {
   try {
     config = getSupabasePublicConfig();
   } catch {
-    return supabaseResponse;
+    return {
+      isConfigured: false,
+      response: supabaseResponse,
+      user: null,
+    };
   }
 
   const supabase = createServerClient<Database>(
@@ -43,10 +56,26 @@ export async function updateSession(request: NextRequest) {
   );
 
   try {
-    await supabase.auth.getUser();
-  } catch {
-    return supabaseResponse;
-  }
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
 
-  return supabaseResponse;
+    return {
+      isConfigured: true,
+      response: supabaseResponse,
+      user,
+    };
+  } catch {
+    return {
+      isConfigured: true,
+      response: supabaseResponse,
+      user: null,
+    };
+  }
+}
+
+export async function updateSession(request: NextRequest) {
+  const { response } = await refreshSession(request);
+
+  return response;
 }

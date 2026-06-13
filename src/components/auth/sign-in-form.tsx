@@ -16,6 +16,7 @@ type FormErrors = {
 
 type SignInFormProps = {
   initialMessage?: string;
+  redirectTo?: string;
 };
 
 const AUTH_NOT_CONFIGURED_MESSAGE =
@@ -45,7 +46,10 @@ function getSafeAuthError(error: unknown) {
   return "Invalid email or password.";
 }
 
-export function SignInForm({ initialMessage }: SignInFormProps) {
+export function SignInForm({
+  initialMessage,
+  redirectTo = APP_ROUTES.dashboard,
+}: SignInFormProps) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState<FormErrors>({});
@@ -79,7 +83,7 @@ export function SignInForm({ initialMessage }: SignInFormProps) {
         return;
       }
 
-      window.location.assign(APP_ROUTES.dashboard);
+      window.location.assign(redirectTo);
     } catch (error) {
       setFormMessage(getSafeAuthError(error));
     } finally {

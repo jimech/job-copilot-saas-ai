@@ -8,3 +8,10 @@ export function getSafeRedirectPath(
 
   return value;
 }
+
+export function createSignInRedirectUrl(origin: string, nextPath: string) {
+  const url = new URL("/sign-in", origin);
+  url.searchParams.set("next", getSafeRedirectPath(nextPath, "/dashboard"));
+
+  return url;
+}

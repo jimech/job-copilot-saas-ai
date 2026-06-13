@@ -112,11 +112,12 @@ Currently implemented:
 - Supabase auth callback and sign-out route handlers
 - Supabase sign-up and sign-in pages
 - Supabase session refresh proxy
+- Authentication-based app route protection
 - Documentation
 
 Not implemented yet:
 
-- Route protection
+- Admin role checks
 - Database
 - Resume builder logic
 - AI logic
@@ -125,5 +126,7 @@ Not implemented yet:
 - Application tracker logic
 
 ## Notes
+
+Protected app routes require authentication. Unauthenticated users are redirected to `/sign-in?next=...`, and signed-in users who visit `/sign-in` or `/sign-up` are redirected to `/dashboard`.
 
 This repository is being built ticket-by-ticket. Keep changes scoped, validate locally before committing, and avoid adding integrations before their implementation tickets.
