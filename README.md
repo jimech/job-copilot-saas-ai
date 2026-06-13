@@ -110,11 +110,12 @@ Currently implemented:
 - Environment variable validation
 - Supabase client helpers
 - Supabase auth callback and sign-out route handlers
+- Supabase sign-up and sign-in pages
+- Supabase session refresh middleware
 - Documentation
 
 Not implemented yet:
 
-- Sign-in and sign-up forms
 - Route protection
 - Database
 - Resume builder logic

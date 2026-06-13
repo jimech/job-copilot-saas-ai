@@ -43,7 +43,9 @@ The production redirect URL should later use the deployed app domain:
 https://your-domain.com/auth/callback
 ```
 
-The auth callback, sign-out route handler, and sign-up form exist, but the sign-in form is not implemented yet.
+The auth callback, sign-out route handler, sign-up form, sign-in form, and Supabase session refresh middleware exist. Route protection is not implemented yet, so dashboard and app routes may still be accessible without login until the next auth ticket.
+
+Supabase environment variables are required to test real auth behavior. If Supabase public variables are missing, the middleware allows the app to render without crashing.
 
 ## Testing Sign-Up Locally
 
@@ -91,6 +93,27 @@ http://localhost:3002/sign-in
 6. Sign in with the test user.
 
 If email confirmation is enabled, confirm the test user's email before sign-in works. Do not commit `.env.local` or real Supabase secrets.
+
+## Supabase Session Refresh Middleware
+
+The app includes middleware that refreshes Supabase auth cookies before server-rendered routes load. It does not redirect unauthenticated users or protect routes yet.
+
+For middleware checks on a known port:
+
+```bash
+npm run dev -- -p 3002
+```
+
+Visit:
+
+```txt
+http://localhost:3002/
+http://localhost:3002/sign-in
+http://localhost:3002/sign-up
+http://localhost:3002/dashboard
+```
+
+Expected for this phase: pages render, dashboard may still be accessible without login, and missing Supabase public env vars should not crash the app.
 
 ## Running the App
 
