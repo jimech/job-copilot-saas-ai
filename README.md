@@ -94,6 +94,7 @@ See [docs/codex-workflow.md](docs/codex-workflow.md).
 - [Technical architecture](docs/technical-architecture.md)
 - [Database schema plan](docs/database-schema.md)
 - [Database development](docs/database-development.md)
+- [Database QA checklist](docs/database-qa-checklist.md)
 - [Security plan](docs/security-plan.md)
 - [Environment variables](docs/environment-variables.md)
 - [Local development](docs/local-development.md)
@@ -106,7 +107,7 @@ See [docs/codex-workflow.md](docs/codex-workflow.md).
 Current phase:
 
 ```txt
-Phase 4 — Database Foundation In Progress
+Phase 4 — Database Foundation Complete
 ```
 
 Currently implemented:
@@ -129,6 +130,7 @@ Currently implemented:
 - RLS policy migration created
 - RLS policy migration applied to Supabase
 - Auth user database sync
+- Phase 4 database QA checklist
 - Documentation
 
 Not implemented yet:
@@ -136,7 +138,8 @@ Not implemented yet:
 - Admin bypass policies
 - Storage policies
 - pgvector and document embeddings
-- Database-backed product pages
+- Resume builder database features
+- Job/application persistence features
 - Full admin route enforcement
 - Resume builder logic
 - Resume upload/storage
@@ -156,6 +159,8 @@ Onboarding currently saves basic profile preferences to Supabase Auth user metad
 Supabase Auth users are synced into the app database after auth callback and onboarding sync. The sync upserts `users`, ensures a `profiles` row, and ensures a free `subscriptions` row. It is safe to call multiple times and does not accept user IDs from the client.
 
 Drizzle is configured for Supabase Postgres schema and migration work. Core schema tables now exist in Supabase Postgres after applying the initial generated migration. The RLS policy migration has also been applied: it uses `auth.uid() = id` for `users`, `auth.uid() = user_id` for user-owned tables, global job reads for `jobs.user_id is null`, read-only regular-user access for `subscriptions`, and select/insert-only regular-user access for `ai_generations`. Admin bypass policies, storage policies, pgvector setup, the `document_embeddings` table, and database-backed product pages have not been created yet.
+
+Use the [database QA checklist](docs/database-qa-checklist.md) to verify Phase 4 database setup, RLS, and auth user sync.
 
 Navigation is now auth-aware. Signed-out users see marketing and auth links, while signed-in users see app links and a sign-out control that posts to `/auth/sign-out`. No database profile data is used yet.
 

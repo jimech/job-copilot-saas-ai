@@ -2,7 +2,9 @@
 
 ## Overview
 
-The app uses Drizzle ORM for schema definitions, migrations, and server-side queries against Supabase Postgres. The core application schema tables now exist in TypeScript, the initial SQL migration has been applied to Supabase, and the initial RLS policy migration has been applied. pgvector setup and product database logic will be handled in later tickets.
+The app uses Drizzle ORM for schema definitions, migrations, and server-side queries against Supabase Postgres. Phase 4 database foundation is complete: the core application schema tables now exist in TypeScript, the initial SQL migration has been applied to Supabase, the initial RLS policy migration has been applied, and auth users sync into app database rows. pgvector setup and product database logic will be handled in later tickets.
+
+Use [Database QA Checklist](database-qa-checklist.md) for verification.
 
 ## Local Environment
 

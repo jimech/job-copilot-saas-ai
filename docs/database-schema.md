@@ -13,6 +13,7 @@ Current implementation status:
 - Core Drizzle schema tables exist in `src/server/db/schema/index.ts`.
 - The initial migration exists in `src/server/db/migrations` and has been applied to Supabase.
 - The RLS policy migration has been applied to Supabase.
+- Auth users sync into `users`, `profiles`, and `subscriptions`.
 - `document_embeddings` and pgvector are intentionally deferred to a later ticket.
 
 ## 2. Tables
@@ -328,6 +329,8 @@ Auth sync status:
 - `users`, `profiles`, and `subscriptions` are created or ensured after auth callback and onboarding sync.
 - Onboarding still stores metadata in Supabase Auth, then syncs that metadata into the app database.
 - Product pages are not connected to the resumes, jobs, or applications tables yet.
+
+Use [Database QA Checklist](database-qa-checklist.md) to verify tables, RLS policies, and auth user sync.
 
 ## 6. Future Notes
 

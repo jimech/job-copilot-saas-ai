@@ -39,6 +39,7 @@ Important routes currently present:
 - `/admin`
 - `/terms`
 - `/privacy`
+- `/api/auth/sync-user`
 - `/ui-smoke-test`
 
 ## Components
@@ -67,6 +68,8 @@ Important routes currently present:
 - `src/server/db/client.ts` exposes a lazy server-side Drizzle client.
 - `src/server/db/schema/index.ts` is the central Drizzle schema export file for core application tables and enums.
 - `src/server/db/migrations` is reserved for generated Drizzle migration files.
+- `src/server/users` contains server-side user helpers, including Supabase Auth to app database sync.
+- `src/app/api/auth/sync-user/route.ts` is the protected route handler that syncs the current authenticated user into the app database.
 
 ## Types
 
@@ -80,6 +83,7 @@ Current docs:
 - `docs/technical-architecture.md`
 - `docs/database-schema.md`
 - `docs/database-development.md`
+- `docs/database-qa-checklist.md`
 - `docs/security-plan.md`
 - `docs/environment-variables.md`
 - `docs/auth-qa-checklist.md`

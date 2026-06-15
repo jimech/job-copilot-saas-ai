@@ -14,6 +14,8 @@ Server-side user checks are required for protected actions. Client-side checks a
 
 Supabase Auth users are synced into the app database after successful auth callback and onboarding sync. The protected sync route uses the server session user and does not accept user IDs from the client.
 
+Use [Database QA Checklist](database-qa-checklist.md) to verify database sync and RLS behavior.
+
 Protected routes:
 
 - `/dashboard`
