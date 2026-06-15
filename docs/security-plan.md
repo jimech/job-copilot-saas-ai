@@ -44,6 +44,8 @@ Rules:
 
 Supabase RLS must be enabled for user-owned tables.
 
+Status: an RLS policy migration has been created but not applied yet. Applying the RLS migration will happen in the next database ticket.
+
 Tables requiring user isolation:
 
 - `profiles`
@@ -69,6 +71,14 @@ Special case for jobs:
 - Authenticated users may read global jobs.
 - Users may manage their own manually saved jobs.
 - Users must not modify global/admin jobs.
+
+Initial policy model:
+
+- `users` policies use `auth.uid() = id`.
+- User-owned tables use `auth.uid() = user_id`.
+- `jobs` allows authenticated users to read global jobs where `user_id is null` and manage only their own jobs.
+- `subscriptions` are read-only to regular users.
+- `ai_generations` are select/insert only for regular users.
 
 ## 5. Storage Security
 

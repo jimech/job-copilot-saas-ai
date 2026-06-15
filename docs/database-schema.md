@@ -2,7 +2,7 @@
 
 ## 1. Database Overview
 
-The app uses Supabase Postgres as the primary relational database. Drizzle ORM now defines the core schema tables in TypeScript, and the initial SQL migration has been generated. Later tickets will apply migrations to Supabase and provide typed database access from server-side application code.
+The app uses Supabase Postgres as the primary relational database. Drizzle ORM now defines the core schema tables in TypeScript, and the initial SQL migration has been applied to Supabase. Later tickets will apply RLS policies and provide typed database access from server-side application code.
 
 Most user-owned tables include a `user_id` column so data can be scoped to the authenticated user. User data must be isolated by default, and Supabase Row Level Security will be used to enforce ownership rules at the database layer. Server-side authorization checks should also be used before reading or mutating protected records.
 
@@ -11,8 +11,8 @@ pgvector will be used later for embeddings that support resume, job, application
 Current implementation status:
 
 - Core Drizzle schema tables exist in `src/server/db/schema/index.ts`.
-- The initial migration exists in `src/server/db/migrations`, but it has not been applied yet.
-- RLS policies have not been added yet.
+- The initial migration exists in `src/server/db/migrations` and has been applied to Supabase.
+- The RLS policy migration has been created but not applied yet.
 - `document_embeddings` and pgvector are intentionally deferred to a later ticket.
 
 ## 2. Tables
@@ -311,6 +311,15 @@ User-owned rows must include `user_id`. Users can select, insert, update, and de
 Global/admin jobs may be readable by authenticated users. User-saved jobs may only be managed by the owner. Admin operations require an admin role and should be performed through trusted server-side routes.
 
 Service role access must only happen server-side. The service role key must never be exposed to client components, browser code, or public environment variables.
+
+Initial RLS migration status:
+
+- Created but not applied yet.
+- `users` policies use `auth.uid() = id`.
+- User-owned tables use `auth.uid() = user_id`.
+- `jobs` allows authenticated users to read global jobs where `user_id is null` and manage only their own jobs.
+- `subscriptions` are read-only to regular users.
+- `ai_generations` are select/insert only for regular users.
 
 ## 6. Future Notes
 
