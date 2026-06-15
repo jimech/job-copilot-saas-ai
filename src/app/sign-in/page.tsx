@@ -21,6 +21,8 @@ function getSafeCallbackErrorMessage(error: string | string[] | undefined) {
       return "We could not complete sign-in. Please try again.";
     case "auth_callback_unavailable":
       return "Authentication is temporarily unavailable. Please try again later.";
+    case "user_sync_failed":
+      return "We could not finish setting up your account. Please try signing in again.";
     case "auth_unconfigured":
       return "Authentication is not configured yet. Add Supabase environment variables to continue.";
     default:

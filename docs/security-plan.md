@@ -12,6 +12,8 @@ The MVP should use Supabase Auth with email/password authentication. Authenticat
 
 Server-side user checks are required for protected actions. Client-side checks are useful for navigation and user experience, but they are not enough for security.
 
+Supabase Auth users are synced into the app database after successful auth callback and onboarding sync. The protected sync route uses the server session user and does not accept user IDs from the client.
+
 Protected routes:
 
 - `/dashboard`
@@ -39,6 +41,7 @@ Rules:
 - Regular users cannot modify global/admin jobs unless explicitly allowed.
 - Admin checks must happen server-side.
 - Never trust role information sent from the browser.
+- Never trust user IDs sent from the browser for auth/database sync.
 
 ## 4. Row Level Security Plan
 

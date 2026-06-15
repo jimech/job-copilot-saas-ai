@@ -3,6 +3,7 @@ import { NextResponse, type NextRequest } from "next/server";
 import { APP_ROUTES } from "@/lib/constants/app";
 import { getSafeRedirectPath } from "@/server/auth/redirects";
 import { createServerSupabaseClient } from "@/server/supabase/server";
+import { syncAuthUserToDatabase } from "@/server/users/sync-user";
 
 export async function GET(request: NextRequest) {
   const requestUrl = new URL(request.url);
@@ -31,6 +32,24 @@ export async function GET(request: NextRequest) {
           `${APP_ROUTES.signIn}?error=auth_callback_failed`,
           requestUrl.origin,
         ),
+      );
+    }
+
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    if (!user) {
+      return NextResponse.redirect(
+        new URL(`${APP_ROUTES.signIn}?error=user_sync_failed`, requestUrl.origin),
+      );
+    }
+
+    try {
+      await syncAuthUserToDatabase(user);
+    } catch {
+      return NextResponse.redirect(
+        new URL(`${APP_ROUTES.signIn}?error=user_sync_failed`, requestUrl.origin),
       );
     }
 

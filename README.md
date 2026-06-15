@@ -128,6 +128,7 @@ Currently implemented:
 - Initial migration applied to Supabase Postgres
 - RLS policy migration created
 - RLS policy migration applied to Supabase
+- Auth user database sync
 - Documentation
 
 Not implemented yet:
@@ -151,6 +152,8 @@ Protected app routes require authentication. Unauthenticated users are redirecte
 Server auth utilities live under `src/server/auth`. Future server pages, actions, and route handlers should use `requireUser()` when authentication is required, and `requireAdmin()` after admin roles are configured. Full admin route enforcement is not implemented yet.
 
 Onboarding currently saves basic profile preferences to Supabase Auth user metadata. Database-backed profile persistence will be added in a later database phase.
+
+Supabase Auth users are synced into the app database after auth callback and onboarding sync. The sync upserts `users`, ensures a `profiles` row, and ensures a free `subscriptions` row. It is safe to call multiple times and does not accept user IDs from the client.
 
 Drizzle is configured for Supabase Postgres schema and migration work. Core schema tables now exist in Supabase Postgres after applying the initial generated migration. The RLS policy migration has also been applied: it uses `auth.uid() = id` for `users`, `auth.uid() = user_id` for user-owned tables, global job reads for `jobs.user_id is null`, read-only regular-user access for `subscriptions`, and select/insert-only regular-user access for `ai_generations`. Admin bypass policies, storage policies, pgvector setup, the `document_embeddings` table, and database-backed product pages have not been created yet.
 

@@ -322,6 +322,13 @@ Initial RLS migration status:
 - `ai_generations` are select/insert only for regular users.
 - Admin bypass policies and storage policies are not implemented yet.
 
+Auth sync status:
+
+- Supabase Auth users are synced into app database tables server-side.
+- `users`, `profiles`, and `subscriptions` are created or ensured after auth callback and onboarding sync.
+- Onboarding still stores metadata in Supabase Auth, then syncs that metadata into the app database.
+- Product pages are not connected to the resumes, jobs, or applications tables yet.
+
 ## 6. Future Notes
 
 - Add organizations later for teams/coaches.

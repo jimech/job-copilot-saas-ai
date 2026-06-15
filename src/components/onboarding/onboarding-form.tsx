@@ -76,6 +76,16 @@ function getSafeSaveError(error: unknown) {
   return "We could not save your onboarding details. Please try again.";
 }
 
+async function syncUserToDatabase() {
+  const response = await fetch("/api/auth/sync-user", {
+    method: "POST",
+  });
+
+  if (!response.ok) {
+    throw new Error("User sync failed.");
+  }
+}
+
 export function OnboardingForm({ initialValues }: OnboardingFormProps) {
   const [values, setValues] = useState<OnboardingFormValues>(initialValues);
   const [errors, setErrors] = useState<OnboardingFormErrors>({});
@@ -124,6 +134,8 @@ export function OnboardingForm({ initialValues }: OnboardingFormProps) {
         setFormMessage(getSafeSaveError(error));
         return;
       }
+
+      await syncUserToDatabase();
 
       window.location.assign(APP_ROUTES.dashboard);
     } catch (error) {

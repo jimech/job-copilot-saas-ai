@@ -68,4 +68,6 @@ Drizzle ORM is installed and configured. The core schema tables now exist in Sup
 
 The RLS policy migration has been applied. It protects user-owned data with `auth.uid() = user_id`, uses `auth.uid() = id` for `users`, allows global job reads through `jobs.user_id is null`, keeps `subscriptions` read-only to regular users, and keeps `ai_generations` select/insert only for regular users.
 
+Supabase Auth users are synced into the app database after a successful auth callback and after onboarding metadata is saved. The sync upserts `users` and ensures one `profiles` row and one free `subscriptions` row exist. It is safe to call multiple times.
+
 Admin bypass policies and storage policies are not implemented yet. Product pages are not connected to the database yet. `document_embeddings` and pgvector setup are intentionally deferred to a later pgvector ticket.
