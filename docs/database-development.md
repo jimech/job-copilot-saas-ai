@@ -2,7 +2,7 @@
 
 ## Overview
 
-The app uses Drizzle ORM for schema definitions, migrations, and server-side queries against Supabase Postgres. The core application schema tables now exist in TypeScript, and the initial SQL migration has been generated. Applying migrations, RLS policies, pgvector setup, and product database logic will be handled in later tickets.
+The app uses Drizzle ORM for schema definitions, migrations, and server-side queries against Supabase Postgres. The core application schema tables now exist in TypeScript, and the initial SQL migration has been applied to Supabase. RLS policies, pgvector setup, and product database logic will be handled in later tickets.
 
 ## Local Environment
 
@@ -47,9 +47,9 @@ Do not run migration commands against production without reviewing the generated
 2. Run `npm run db:generate`.
 3. Review the generated SQL in `src/server/db/migrations`.
 4. Commit schema changes and generated migration files together.
-5. Apply the migration only in the dedicated migration-apply ticket.
+5. Apply reviewed migrations to Supabase with `npm run db:migrate` in a dedicated migration-apply ticket.
 
-The initial migration has been generated but has not been applied to Supabase. Do not run `npm run db:migrate` until the dedicated migration-apply ticket.
+The initial migration has been applied to Supabase. Future schema changes should continue to use generated Drizzle migrations.
 
 ## Safety Rules
 
@@ -62,6 +62,6 @@ The initial migration has been generated but has not been applied to Supabase. D
 
 ## Current Status
 
-Drizzle ORM is installed and configured. The core schema tables now exist for users, profiles, subscriptions, resumes, resume documents, jobs, applications, generated documents, and AI generations. The initial migration has been generated in `src/server/db/migrations`.
+Drizzle ORM is installed and configured. The core schema tables now exist in Supabase Postgres for users, profiles, subscriptions, resumes, resume documents, jobs, applications, generated documents, and AI generations. The initial migration has been generated in `src/server/db/migrations` and applied to Supabase.
 
-The migration has not been applied yet, and there are no RLS policies yet. `document_embeddings` and pgvector setup are intentionally deferred to a later pgvector ticket.
+There are no RLS policies yet, and product pages are not connected to the database yet. `document_embeddings` and pgvector setup are intentionally deferred to a later pgvector ticket.
