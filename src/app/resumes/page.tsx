@@ -1,8 +1,14 @@
+import Link from "next/link";
+
 import { DashboardShell } from "@/components/layout/dashboard-shell";
 import { PageShell } from "@/components/layout/page-shell";
-import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { requireUser } from "@/server/auth";
 import { listResumesForUser } from "@/server/resumes";
+
+import { createResumeAction } from "./actions";
 
 const dateFormatter = new Intl.DateTimeFormat("en", {
   month: "short",
@@ -25,13 +31,31 @@ export default async function ResumesPage() {
         title="Resumes"
         description="Review the resumes saved to your account. Create, edit, export, and tailoring flows are coming next."
       >
+        <form
+          action={createResumeAction}
+          className="mb-6 rounded-lg border border-border bg-background p-4"
+        >
+          <div className="grid gap-4 sm:grid-cols-[1fr_auto] sm:items-end">
+            <div className="grid gap-2">
+              <Label htmlFor="title">Resume title</Label>
+              <Input
+                id="title"
+                name="title"
+                placeholder="Software Engineer Resume"
+                maxLength={200}
+              />
+            </div>
+            <Button type="submit">Create resume</Button>
+          </div>
+        </form>
+
         {resumes.length === 0 ? (
           <div className="rounded-lg border border-dashed border-border bg-muted/40 p-6">
             <h2 className="text-lg font-semibold tracking-tight">
               No resumes yet
             </h2>
             <p className="mt-2 text-sm leading-6 text-muted-foreground">
-              Create your first resume in the next step.
+              Use the form above to create your first resume.
             </p>
           </div>
         ) : (
@@ -61,9 +85,9 @@ export default async function ResumesPage() {
                       </div>
                     </dl>
                   </div>
-                  <Badge className="w-fit" variant="secondary">
-                    Editor coming soon
-                  </Badge>
+                  <Button asChild className="w-fit" variant="outline">
+                    <Link href={`/resumes/${resume.id}`}>Open editor</Link>
+                  </Button>
                 </div>
               </article>
             ))}
