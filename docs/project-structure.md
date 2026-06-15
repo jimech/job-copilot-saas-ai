@@ -29,7 +29,7 @@ Important routes currently present:
 - `/resumes/[resumeId]` edits resume title, basics, summary, and skills for a user-owned resume.
 - `/resumes/new`
 - `/resumes/[resumeId]/edit`
-- `/resumes/[resumeId]/preview`
+- `/resumes/[resumeId]/preview` shows an authenticated, user-scoped read-only resume preview.
 - `/resumes/[resumeId]/tailor`
 - `/jobs`
 - `/jobs/[jobId]`
@@ -49,6 +49,7 @@ Important routes currently present:
 - `src/components/auth` contains authentication UI such as sign-in, sign-up, and sign-out controls.
 - `src/components/layout` contains layout wrappers such as marketing and dashboard shells.
 - `src/components/onboarding` contains the metadata-backed onboarding form.
+- `src/components/resumes` contains resume presentation components such as the read-only preview.
 - `src/components/ui` contains shadcn/ui components owned by the project.
 
 ## Lib

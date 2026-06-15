@@ -48,9 +48,14 @@ export default async function ResumeEditorPage({
         description="Edit resume settings, basic contact information, professional summary, and skills."
       >
         <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <Button asChild variant="outline">
-            <Link href={APP_ROUTES.resumes}>Back to resumes</Link>
-          </Button>
+          <div className="flex flex-col gap-3 sm:flex-row">
+            <Button asChild variant="outline">
+              <Link href={APP_ROUTES.resumes}>Back to resumes</Link>
+            </Button>
+            <Button asChild variant="secondary">
+              <Link href={`/resumes/${resume.id}/preview`}>Preview resume</Link>
+            </Button>
+          </div>
           {query.saved === "1" ? (
             <p className="rounded-lg border border-border bg-muted px-3 py-2 text-sm font-medium text-foreground">
               Resume saved.

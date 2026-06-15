@@ -135,6 +135,7 @@ Currently implemented:
 - Server-side resume database service with user ownership filters
 - `/resumes` page reads authenticated, user-scoped resume list data
 - `/resumes/[resumeId]` supports editing title, basics, summary, and skills
+- `/resumes/[resumeId]/preview` shows an authenticated, user-scoped read-only resume preview
 - Documentation
 
 Not implemented yet:
@@ -176,6 +177,8 @@ The resume database service under `src/server/resumes` provides server-side Driz
 The `/resumes` page now renders the authenticated user's saved resumes using the server-side list service. Create, delete, duplicate, PDF export, AI tailoring, and upload flows remain deferred.
 
 The `/resumes/[resumeId]` page now provides the first resume editor form for title, basic contact information, professional summary, and skills. Experience, education, projects, certifications, languages, PDF export, AI tailoring, and file upload remain deferred.
+
+The `/resumes/[resumeId]/preview` page renders a read-only preview of saved resume content. PDF export remains deferred.
 
 Use the [database QA checklist](docs/database-qa-checklist.md) to verify Phase 4 database setup, RLS, and auth user sync.
 
