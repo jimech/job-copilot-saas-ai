@@ -11,7 +11,7 @@ import { APP_ROUTES } from "@/lib/constants/app";
 import { requireUser } from "@/server/auth";
 import { getResumeForUser } from "@/server/resumes";
 
-import { updateResumeBasicsAction } from "./actions";
+import { deleteResumeAction, updateResumeBasicsAction } from "./actions";
 
 type ResumeEditorPageProps = {
   params: Promise<{
@@ -19,6 +19,7 @@ type ResumeEditorPageProps = {
   }>;
   searchParams: Promise<{
     saved?: string;
+    deleteError?: string;
   }>;
 };
 
@@ -38,6 +39,7 @@ export default async function ResumeEditorPage({
   }
 
   const updateResume = updateResumeBasicsAction.bind(null, resume.id);
+  const deleteResume = deleteResumeAction.bind(null, resume.id);
   const basics = resume.content.basics;
 
   return (
@@ -208,6 +210,40 @@ export default async function ResumeEditorPage({
             <Button type="submit">Save resume</Button>
           </div>
         </form>
+
+        <section className="mt-10 rounded-lg border border-destructive/30 bg-destructive/5 p-4">
+          <div>
+            <h2 className="text-lg font-semibold tracking-tight">
+              Danger zone
+            </h2>
+            <p className="mt-1 text-sm text-muted-foreground">
+              Delete this resume permanently from your account.
+            </p>
+          </div>
+          {query.deleteError === "confirm" ? (
+            <p className="mt-4 rounded-lg border border-destructive/30 bg-background px-3 py-2 text-sm font-medium text-destructive">
+              Please confirm before deleting this resume.
+            </p>
+          ) : null}
+          <form action={deleteResume} className="mt-4 flex flex-col gap-4">
+            <label className="flex items-start gap-3 text-sm leading-6">
+              <input
+                className="mt-1 size-4 rounded border-border"
+                name="confirmDelete"
+                type="checkbox"
+                value="yes"
+              />
+              <span>
+                I understand this will permanently delete this resume.
+              </span>
+            </label>
+            <div>
+              <Button type="submit" variant="destructive">
+                Delete resume
+              </Button>
+            </div>
+          </form>
+        </section>
       </PageShell>
     </DashboardShell>
   );

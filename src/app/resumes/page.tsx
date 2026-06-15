@@ -20,7 +20,14 @@ function formatDate(date: Date) {
   return dateFormatter.format(date);
 }
 
-export default async function ResumesPage() {
+type ResumesPageProps = {
+  searchParams: Promise<{
+    deleted?: string;
+  }>;
+};
+
+export default async function ResumesPage({ searchParams }: ResumesPageProps) {
+  const query = await searchParams;
   const user = await requireUser();
   const resumes = await listResumesForUser(user.id);
 
@@ -31,6 +38,12 @@ export default async function ResumesPage() {
         title="Resumes"
         description="Review the resumes saved to your account. Create, edit, export, and tailoring flows are coming next."
       >
+        {query.deleted === "1" ? (
+          <p className="mb-6 rounded-lg border border-border bg-muted px-3 py-2 text-sm font-medium text-foreground">
+            Resume deleted.
+          </p>
+        ) : null}
+
         <form
           action={createResumeAction}
           className="mb-6 rounded-lg border border-border bg-background p-4"

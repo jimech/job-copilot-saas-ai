@@ -26,7 +26,7 @@ Important routes currently present:
 - `/onboarding`
 - `/dashboard`
 - `/resumes` reads authenticated, user-scoped resume list data.
-- `/resumes/[resumeId]` edits resume title, basics, summary, and skills for a user-owned resume.
+- `/resumes/[resumeId]` edits resume title, basics, summary, and skills for a user-owned resume and supports confirmed deletion of owned resumes.
 - `/resumes/new`
 - `/resumes/[resumeId]/edit`
 - `/resumes/[resumeId]/preview` shows an authenticated, user-scoped read-only resume preview.

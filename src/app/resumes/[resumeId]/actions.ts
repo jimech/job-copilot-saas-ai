@@ -5,7 +5,11 @@ import { notFound, redirect } from "next/navigation";
 
 import { normalizeStringList } from "@/lib/resumes";
 import { requireUser } from "@/server/auth";
-import { getResumeForUser, updateResumeForUser } from "@/server/resumes";
+import {
+  deleteResumeForUser,
+  getResumeForUser,
+  updateResumeForUser,
+} from "@/server/resumes";
 
 function getFormString(formData: FormData, key: string) {
   const value = formData.get(key);
@@ -62,4 +66,25 @@ export async function updateResumeBasicsAction(
   revalidatePath("/resumes");
   revalidatePath(`/resumes/${resumeId}`);
   redirect(`/resumes/${resumeId}?saved=1`);
+}
+
+export async function deleteResumeAction(resumeId: string, formData: FormData) {
+  const user = await requireUser();
+  const confirmDelete = getFormString(formData, "confirmDelete");
+
+  if (confirmDelete !== "yes") {
+    redirect(`/resumes/${resumeId}?deleteError=confirm`);
+  }
+
+  const deleted = await deleteResumeForUser({
+    userId: user.id,
+    resumeId,
+  });
+
+  if (!deleted) {
+    notFound();
+  }
+
+  revalidatePath("/resumes");
+  redirect("/resumes?deleted=1");
 }

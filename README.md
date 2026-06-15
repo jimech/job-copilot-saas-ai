@@ -135,6 +135,7 @@ Currently implemented:
 - Server-side resume database service with user ownership filters
 - `/resumes` page reads authenticated, user-scoped resume list data
 - `/resumes/[resumeId]` supports editing title, basics, summary, and skills
+- `/resumes/[resumeId]` supports deleting owned resumes with server-side ownership enforcement
 - `/resumes/[resumeId]/preview` shows an authenticated, user-scoped read-only resume preview
 - Documentation
 
@@ -144,7 +145,7 @@ Not implemented yet:
 - Storage policies
 - pgvector and document embeddings
 - Job/application persistence features
-- Resume delete and duplicate flows
+- Resume duplicate flow
 - Resume API routes
 - Experience, education, projects, certifications, and languages editor sections
 - PDF export
@@ -170,13 +171,13 @@ Supabase Auth users are synced into the app database after auth callback and onb
 
 Drizzle is configured for Supabase Postgres schema and migration work. Core schema tables now exist in Supabase Postgres after applying the initial generated migration. The RLS policy migration has also been applied: it uses `auth.uid() = id` for `users`, `auth.uid() = user_id` for user-owned tables, global job reads for `jobs.user_id is null`, read-only regular-user access for `subscriptions`, and select/insert-only regular-user access for `ai_generations`. Admin bypass policies, storage policies, pgvector setup, the `document_embeddings` table, and database-backed product pages have not been created yet.
 
-Resume domain types and Zod validation now define the JSON shape stored in `resumes.content_json`. Resume CRUD pages, PDF export, AI tailoring, and file upload remain deferred.
+Resume domain types and Zod validation now define the JSON shape stored in `resumes.content_json`. Duplicate, PDF export, AI tailoring, and file upload remain deferred.
 
 The resume database service under `src/server/resumes` provides server-side Drizzle helpers for listing, reading, creating, updating, and deleting resumes. Every query requires `userId` and filters by ownership. Resume API routes are still deferred.
 
-The `/resumes` page now renders the authenticated user's saved resumes using the server-side list service. Create, delete, duplicate, PDF export, AI tailoring, and upload flows remain deferred.
+The `/resumes` page now renders the authenticated user's saved resumes using the server-side list service. Duplicate, PDF export, AI tailoring, and upload flows remain deferred.
 
-The `/resumes/[resumeId]` page now provides the first resume editor form for title, basic contact information, professional summary, and skills. Experience, education, projects, certifications, languages, PDF export, AI tailoring, and file upload remain deferred.
+The `/resumes/[resumeId]` page now provides the first resume editor form for title, basic contact information, professional summary, and skills. It also supports deleting owned resumes through a confirmed server action that enforces ownership before deletion. Experience, education, projects, certifications, languages, duplicate, PDF export, AI tailoring, and file upload remain deferred.
 
 The `/resumes/[resumeId]/preview` page renders a read-only preview of saved resume content. PDF export remains deferred.
 
