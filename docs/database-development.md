@@ -2,7 +2,7 @@
 
 ## Overview
 
-The app uses Drizzle ORM for schema definitions, migrations, and server-side queries against Supabase Postgres. The core application schema tables now exist in TypeScript, and the initial SQL migration has been applied to Supabase. An RLS policy migration has been created but not applied yet. pgvector setup and product database logic will be handled in later tickets.
+The app uses Drizzle ORM for schema definitions, migrations, and server-side queries against Supabase Postgres. The core application schema tables now exist in TypeScript, the initial SQL migration has been applied to Supabase, and the initial RLS policy migration has been applied. pgvector setup and product database logic will be handled in later tickets.
 
 ## Local Environment
 
@@ -51,7 +51,7 @@ Do not run migration commands against production without reviewing the generated
 
 The initial migration has been applied to Supabase. Future schema changes should continue to use generated Drizzle migrations.
 
-The RLS policy migration has been created in `src/server/db/migrations` but has not been applied yet. Applying RLS will happen in the next ticket.
+The initial RLS policy migration has been applied to Supabase. Future RLS changes should continue to use reviewed Drizzle SQL migrations.
 
 ## Safety Rules
 
@@ -66,6 +66,6 @@ The RLS policy migration has been created in `src/server/db/migrations` but has 
 
 Drizzle ORM is installed and configured. The core schema tables now exist in Supabase Postgres for users, profiles, subscriptions, resumes, resume documents, jobs, applications, generated documents, and AI generations. The initial migration has been generated in `src/server/db/migrations` and applied to Supabase.
 
-The RLS policy migration has been created but not applied yet. It protects user-owned data with `auth.uid() = user_id`, uses `auth.uid() = id` for `users`, allows global job reads through `jobs.user_id is null`, keeps `subscriptions` read-only to regular users, and keeps `ai_generations` select/insert only for regular users.
+The RLS policy migration has been applied. It protects user-owned data with `auth.uid() = user_id`, uses `auth.uid() = id` for `users`, allows global job reads through `jobs.user_id is null`, keeps `subscriptions` read-only to regular users, and keeps `ai_generations` select/insert only for regular users.
 
-Product pages are not connected to the database yet. `document_embeddings` and pgvector setup are intentionally deferred to a later pgvector ticket.
+Admin bypass policies and storage policies are not implemented yet. Product pages are not connected to the database yet. `document_embeddings` and pgvector setup are intentionally deferred to a later pgvector ticket.

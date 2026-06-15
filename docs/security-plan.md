@@ -44,7 +44,7 @@ Rules:
 
 Supabase RLS must be enabled for user-owned tables.
 
-Status: an RLS policy migration has been created but not applied yet. Applying the RLS migration will happen in the next database ticket.
+Status: the initial RLS policy migration has been applied to Supabase. Admin bypass policies and storage policies are not implemented yet.
 
 Tables requiring user isolation:
 

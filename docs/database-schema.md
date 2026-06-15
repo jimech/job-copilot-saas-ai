@@ -2,7 +2,7 @@
 
 ## 1. Database Overview
 
-The app uses Supabase Postgres as the primary relational database. Drizzle ORM now defines the core schema tables in TypeScript, and the initial SQL migration has been applied to Supabase. Later tickets will apply RLS policies and provide typed database access from server-side application code.
+The app uses Supabase Postgres as the primary relational database. Drizzle ORM now defines the core schema tables in TypeScript, the initial SQL migration has been applied to Supabase, and the initial RLS policy migration has been applied. Later tickets will provide typed database access from server-side application code.
 
 Most user-owned tables include a `user_id` column so data can be scoped to the authenticated user. User data must be isolated by default, and Supabase Row Level Security will be used to enforce ownership rules at the database layer. Server-side authorization checks should also be used before reading or mutating protected records.
 
@@ -12,7 +12,7 @@ Current implementation status:
 
 - Core Drizzle schema tables exist in `src/server/db/schema/index.ts`.
 - The initial migration exists in `src/server/db/migrations` and has been applied to Supabase.
-- The RLS policy migration has been created but not applied yet.
+- The RLS policy migration has been applied to Supabase.
 - `document_embeddings` and pgvector are intentionally deferred to a later ticket.
 
 ## 2. Tables
@@ -314,12 +314,13 @@ Service role access must only happen server-side. The service role key must neve
 
 Initial RLS migration status:
 
-- Created but not applied yet.
+- Applied to Supabase.
 - `users` policies use `auth.uid() = id`.
 - User-owned tables use `auth.uid() = user_id`.
 - `jobs` allows authenticated users to read global jobs where `user_id is null` and manage only their own jobs.
 - `subscriptions` are read-only to regular users.
 - `ai_generations` are select/insert only for regular users.
+- Admin bypass policies and storage policies are not implemented yet.
 
 ## 6. Future Notes
 
