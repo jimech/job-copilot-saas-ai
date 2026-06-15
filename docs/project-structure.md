@@ -25,7 +25,7 @@ Important routes currently present:
 - `/sign-up`
 - `/onboarding`
 - `/dashboard`
-- `/resumes`
+- `/resumes` reads authenticated, user-scoped resume list data.
 - `/resumes/new`
 - `/resumes/[resumeId]/edit`
 - `/resumes/[resumeId]/preview`

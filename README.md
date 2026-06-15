@@ -133,6 +133,7 @@ Currently implemented:
 - Phase 4 database QA checklist
 - Resume domain types and Zod validation
 - Server-side resume database service with user ownership filters
+- `/resumes` page reads authenticated, user-scoped resume list data
 - Documentation
 
 Not implemented yet:
@@ -141,7 +142,7 @@ Not implemented yet:
 - Storage policies
 - pgvector and document embeddings
 - Job/application persistence features
-- Resume CRUD pages
+- Resume create/edit/delete flows
 - Resume server actions or API routes
 - PDF export
 - AI resume tailoring
@@ -169,6 +170,8 @@ Drizzle is configured for Supabase Postgres schema and migration work. Core sche
 Resume domain types and Zod validation now define the JSON shape stored in `resumes.content_json`. Resume CRUD pages, PDF export, AI tailoring, and file upload remain deferred.
 
 The resume database service under `src/server/resumes` provides server-side Drizzle helpers for listing, reading, creating, updating, and deleting resumes. Every query requires `userId` and filters by ownership. Resume UI pages, server actions, and API routes are still deferred.
+
+The `/resumes` page now renders the authenticated user's saved resumes using the server-side list service. Create, edit, delete, duplicate, PDF export, AI tailoring, and upload flows remain deferred.
 
 Use the [database QA checklist](docs/database-qa-checklist.md) to verify Phase 4 database setup, RLS, and auth user sync.
 
