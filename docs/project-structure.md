@@ -55,6 +55,7 @@ Important routes currently present:
 - `src/lib` contains shared utilities and configuration helpers.
 - `src/lib/constants` contains app-level constants.
 - `src/lib/env` contains environment variable validation and integration status helpers.
+- `src/lib/resumes` contains resume domain validation schemas, default content helpers, and parsing utilities for `resumes.content_json`.
 - `src/lib/utils.ts` contains shared utility functions such as `cn`.
 
 ## Server
@@ -73,7 +74,9 @@ Important routes currently present:
 
 ## Types
 
-`src/types` is reserved for shared TypeScript types.
+`src/types` contains shared TypeScript types.
+
+- `src/types/resume.ts` defines the shared resume content shape used by the Resume Builder MVP.
 
 ## Docs
 
