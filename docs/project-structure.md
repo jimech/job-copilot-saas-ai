@@ -70,6 +70,7 @@ Important routes currently present:
 - `src/server/db/schema/index.ts` is the central Drizzle schema export file for core application tables and enums.
 - `src/server/db/migrations` is reserved for generated Drizzle migration files.
 - `src/server/users` contains server-side user helpers, including Supabase Auth to app database sync.
+- `src/server/resumes` contains server-side resume database helpers. The current service enforces `userId` ownership on every resume query; resume UI, server actions, and API routes are still deferred.
 - `src/app/api/auth/sync-user/route.ts` is the protected route handler that syncs the current authenticated user into the app database.
 
 ## Types
@@ -105,7 +106,6 @@ Future server folders may include:
 ```txt
 src/server/ai
 src/server/billing
-src/server/resumes
 src/server/applications
 src/server/jobs
 ```

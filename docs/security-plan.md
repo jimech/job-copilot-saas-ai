@@ -106,6 +106,8 @@ All inputs should be validated with a schema validation library before use. API 
 
 Authorization must be checked before reading or mutating records.
 
+The server-side resume database service enforces ownership by requiring `userId` and filtering every list, read, create, update, and delete operation by that user. Future resume server actions and API routes must use the authenticated session user ID instead of accepting client-provided ownership.
+
 Protected API areas:
 
 - Resume CRUD.

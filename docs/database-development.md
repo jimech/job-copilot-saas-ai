@@ -72,4 +72,6 @@ The RLS policy migration has been applied. It protects user-owned data with `aut
 
 Supabase Auth users are synced into the app database after a successful auth callback and after onboarding metadata is saved. The sync upserts `users` and ensures one `profiles` row and one free `subscriptions` row exist. It is safe to call multiple times.
 
+The resume database service now provides server-side Drizzle helpers for resume CRUD operations. These helpers always require `userId` and filter by ownership in application code, even though RLS is active. Resume UI pages, server actions, and API routes are not connected yet.
+
 Admin bypass policies and storage policies are not implemented yet. Product pages are not connected to the database yet. `document_embeddings` and pgvector setup are intentionally deferred to a later pgvector ticket.

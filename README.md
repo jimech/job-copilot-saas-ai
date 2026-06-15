@@ -107,7 +107,7 @@ See [docs/codex-workflow.md](docs/codex-workflow.md).
 Current phase:
 
 ```txt
-Phase 4 — Database Foundation Complete
+Phase 5 — Resume Builder Foundation
 ```
 
 Currently implemented:
@@ -132,6 +132,7 @@ Currently implemented:
 - Auth user database sync
 - Phase 4 database QA checklist
 - Resume domain types and Zod validation
+- Server-side resume database service with user ownership filters
 - Documentation
 
 Not implemented yet:
@@ -139,9 +140,9 @@ Not implemented yet:
 - Admin bypass policies
 - Storage policies
 - pgvector and document embeddings
-- Resume builder database features
 - Job/application persistence features
 - Resume CRUD pages
+- Resume server actions or API routes
 - PDF export
 - AI resume tailoring
 - File upload
@@ -166,6 +167,8 @@ Supabase Auth users are synced into the app database after auth callback and onb
 Drizzle is configured for Supabase Postgres schema and migration work. Core schema tables now exist in Supabase Postgres after applying the initial generated migration. The RLS policy migration has also been applied: it uses `auth.uid() = id` for `users`, `auth.uid() = user_id` for user-owned tables, global job reads for `jobs.user_id is null`, read-only regular-user access for `subscriptions`, and select/insert-only regular-user access for `ai_generations`. Admin bypass policies, storage policies, pgvector setup, the `document_embeddings` table, and database-backed product pages have not been created yet.
 
 Resume domain types and Zod validation now define the JSON shape stored in `resumes.content_json`. Resume CRUD pages, PDF export, AI tailoring, and file upload remain deferred.
+
+The resume database service under `src/server/resumes` provides server-side Drizzle helpers for listing, reading, creating, updating, and deleting resumes. Every query requires `userId` and filters by ownership. Resume UI pages, server actions, and API routes are still deferred.
 
 Use the [database QA checklist](docs/database-qa-checklist.md) to verify Phase 4 database setup, RLS, and auth user sync.
 
